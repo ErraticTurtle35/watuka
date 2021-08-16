@@ -7,7 +7,7 @@ require "selenium-webdriver"
 # options.add_argument('--chromever=92.0.4515.131')
 # driver = Selenium::WebDriver.for :chrome, options: options
 
-# driver = Selenium::WebDriver.for :firefox
+driver = Selenium::WebDriver.for :firefox
 driver.navigate.to "http://google.com"
 
 element = driver.find_element(name: 'q')
