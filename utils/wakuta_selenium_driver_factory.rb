@@ -1,10 +1,10 @@
-require_relative 'utils/wakuta_configuration_reader'
+require_relative 'wakuta_configuration_reader'
 require "selenium-webdriver"
 
 CHROME_WEBDRIVER_KEY = 'chrome'
 FIREFOX_WEBDRIVER_KEY = 'firefox'
 
-class WakutaSeleniumDriver
+class WakutaSeleniumDriverFactory
   def initialize
     configuration_reader = WakutaConfigurationReader.new
     @configuration = configuration_reader.read_configuration
@@ -27,7 +27,7 @@ class WakutaSeleniumDriver
     when FIREFOX_WEBDRIVER_KEY
       Selenium::WebDriver.for :firefox
     else
-      puts 'upss'
+      puts 'upss' # TODO: CATCH EXCEPTION
       # type code here
     end
   end

@@ -1,6 +1,6 @@
-require_relative 'wakuta_selenium_driver'
+require_relative 'utils/wakuta_selenium_driver_factory'
 
-wakuta_selenium_driver = WakutaSeleniumDriver.new
+wakuta_selenium_driver = WakutaSeleniumDriverFactory.new
 driver = wakuta_selenium_driver.webdriver_instance
 driver.navigate.to "http://google.com"
 
