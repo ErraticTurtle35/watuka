@@ -49,7 +49,7 @@ class SearchOfTalents
 
   def get_random_talent
     @talent_profile_page = TalentProfilePage.new(@talent_search_result_page.driver)
-    TalentProfilePage.gather_talent
+    @talent_profile_page.gather_talent
   end
 
   def validate_talent(random_talent, talents, random_talent_position)
