@@ -1,4 +1,5 @@
 require_relative '../pages/visitor_home_page'
+require_relative '../pages/talent_search_result_page'
 
 class FirstAttempt
   def initialize
@@ -16,22 +17,18 @@ class FirstAttempt
   end
 
   def click_talent_option
-    element2 = @visitor_home_page.get_element(@visitor_home_page.freelancers_options, 'Xpath')
-    element2.click
+    element = @visitor_home_page.get_element(@visitor_home_page.freelancers_options, 'Xpath')
+    element.click
   end
 
   def click_search_input
-    element3 = @visitor_home_page.get_element(@visitor_home_page.search_talent_input, 'Xpath')
-    element3.send_keys "Gabriel Morales"
+    element = @visitor_home_page.get_element(@visitor_home_page.search_talent_input, 'Xpath')
+    element.send_keys "Gabriel Morales"
   end
 
   def click_search_button
-    element4 = @visitor_home_page.get_element(@visitor_home_page.search_button, 'Xpath')
-    element4.click
-  end
-
-  def exit
-    @visitor_home_page.quit
+    element = @visitor_home_page.get_element(@visitor_home_page.search_button, 'Xpath')
+    element.click
   end
 
   def execute_test
@@ -40,6 +37,7 @@ class FirstAttempt
     self.click_talent_option
     self.click_search_input
     self.click_search_button
-    self.exit
+    talent_search_result_page_new = TalentSearchResultPage.new(@visitor_home_page.driver)
+    puts 'a'
   end
 end

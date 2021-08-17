@@ -25,8 +25,4 @@ class VisitorHomePage < BasePage
     @search_button
   end
 
-  def quit
-    @driver.quit
-  end
-
 end
