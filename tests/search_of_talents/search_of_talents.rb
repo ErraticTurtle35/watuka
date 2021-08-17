@@ -33,6 +33,18 @@ class SearchOfTalents
     @talent_search_result_page.gather_talents
   end
 
+  def validate_keywords(talents)
+    # code here
+  end
+
+  def click_random_talent(random_talent_position)
+    @talent_search_result_page.click_talent_by_position(random_talent_position)
+  end
+
+  def get_random_talent_position
+    rand(0..9)
+  end
+
   def execute_test
     self.go_to
     self.click_search_source_button
@@ -40,6 +52,9 @@ class SearchOfTalents
     self.click_search_input
     self.click_search_button
     talents = self.gather_talents
+    self.validate_keywords(talents)
+    random_talent_position = self.get_random_talent_position
+    self.click_random_talent (random_talent_position)
     puts 'a'
   end
 end
