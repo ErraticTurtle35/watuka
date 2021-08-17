@@ -2,7 +2,7 @@ require 'json'
 
 class WakutaConfigurationReader
   def initialize
-    @absolute_path = File.absolute_path("utils/wakuta_configuration.json")
+    @absolute_path = File.dirname(__FILE__) + '/wakuta_configuration.json'
     super
   end
 
