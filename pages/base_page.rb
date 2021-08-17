@@ -53,7 +53,7 @@ class BasePage
     @driver
   end
 
-  def quit
+  def quit_driver
     @driver.quit
   end
 end

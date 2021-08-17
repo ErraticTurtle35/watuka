@@ -1,7 +1,7 @@
-require_relative '../pages/visitor_home_page'
-require_relative '../pages/talent_search_result_page'
+require_relative '../../pages/visitor_home_page'
+require_relative '../../pages/talent_search_result_page'
 
-class FirstAttempt
+class SearchOfTalents
   def initialize
     @visitor_home_page = VisitorHomePage.new
     super
