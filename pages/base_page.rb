@@ -26,6 +26,39 @@ class BasePage
     end
   end
 
+  def get_elements(locator, locator_type)
+    begin
+      element_type = get_available_type_elements(locator_type)
+      return @driver.find_elements(element_type, locator)
+    rescue
+      puts('A') # TODO: Clear the error messages
+    ensure
+      puts('A') # TODO: Clear the error messages
+    end
+  end
+
+  def get_child_element(element, locator, locator_type)
+    begin
+      element_type = get_available_type_elements(locator_type)
+      return element.find_element(element_type, locator)
+    rescue
+      puts('A') # TODO: Clear the error messages
+    ensure
+      puts('A') # TODO: Clear the error messages
+    end
+  end
+
+  def get_child_elements(element, locator, locator_type)
+    begin
+      element_type = get_available_type_elements(locator_type)
+      return element.find_elements(element_type, locator)
+    rescue
+      puts('A') # TODO: Clear the error messages
+    ensure
+      puts('A') # TODO: Clear the error messages
+    end
+  end
+
   def get_available_type_elements(element_type)
     case element_type
     when 'ClassName'

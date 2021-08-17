@@ -4,6 +4,7 @@ require_relative '../../pages/talent_search_result_page'
 class SearchOfTalents
   def initialize
     @visitor_home_page = VisitorHomePage.new
+    @talent_search_result_page = nil
     super
   end
 
@@ -27,13 +28,18 @@ class SearchOfTalents
     @visitor_home_page.click_search_button
   end
 
+  def gather_talents
+    @talent_search_result_page = TalentSearchResultPage.new(@visitor_home_page.driver)
+    @talent_search_result_page.gather_talents
+  end
+
   def execute_test
     self.go_to
     self.click_search_source_button
     self.click_talent_option
     self.click_search_input
     self.click_search_button
-    talent_search_result_page_new = TalentSearchResultPage.new(@visitor_home_page.driver)
+    talents = self.gather_talents
     puts 'a'
   end
 end
