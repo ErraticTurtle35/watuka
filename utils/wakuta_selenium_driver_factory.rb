@@ -3,12 +3,12 @@ require "selenium-webdriver"
 
 CHROME_WEBDRIVER_KEY = 'chrome'
 FIREFOX_WEBDRIVER_KEY = 'firefox'
+WAKUTA_CONFIGURATION_FILE = '/wakuta_configuration.json'
 
 class WakutaSeleniumDriverFactory
   def initialize
-    configuration_reader = WakutaConfigurationReader.new
+    configuration_reader = WakutaConfigurationReader.new(File.dirname(__FILE__), WAKUTA_CONFIGURATION_FILE)
     @configuration = configuration_reader.read_configuration
-    super
   end
 
   def browser_selected

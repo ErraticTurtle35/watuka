@@ -1,17 +1,21 @@
 require_relative '../../pages/visitor_home_page'
 require_relative '../../pages/talent_search_result_page'
 require_relative '../../pages/talent_profile_page'
+require_relative '../../utils/wakuta_configuration_reader'
+
+SEARCH_OF_TALENT_DATA = '/data/search_of_talent_data.json'
 
 class SearchOfTalents
   def initialize
-    @visitor_home_page = VisitorHomePage.new
+    @visitor_home_page = nil
     @talent_search_result_page = nil
     @talent_profile_page = nil
-    super
+    @configuration_reader = WakutaConfigurationReader.new(File.dirname(__FILE__), SEARCH_OF_TALENT_DATA)
   end
 
   def go_to
-    @visitor_home_page.navigate_to 'https://www.upwork.com/'
+    @visitor_home_page = VisitorHomePage.new
+    @visitor_home_page.navigate_to @configuration_reader.read_configuration['url']
   end
 
   def click_search_source_button
@@ -23,7 +27,7 @@ class SearchOfTalents
   end
 
   def click_search_input
-    @visitor_home_page.click_search_input("Gabriel Morales")
+    @visitor_home_page.click_search_input(@configuration_reader.read_configuration['searchKeyword'])
   end
 
   def click_search_button
