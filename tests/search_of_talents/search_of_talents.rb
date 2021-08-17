@@ -1,10 +1,12 @@
 require_relative '../../pages/visitor_home_page'
 require_relative '../../pages/talent_search_result_page'
+require_relative '../../pages/talent_profile_page'
 
 class SearchOfTalents
   def initialize
     @visitor_home_page = VisitorHomePage.new
     @talent_search_result_page = nil
+    @talent_profile_page = nil
     super
   end
 
@@ -45,6 +47,15 @@ class SearchOfTalents
     rand(0..9)
   end
 
+  def get_random_talent
+    @talent_profile_page = TalentProfilePage.new(@talent_search_result_page.driver)
+    TalentProfilePage.gather_talent
+  end
+
+  def validate_talent(random_talent, talents, random_talent_position)
+    # code here
+  end
+
   def execute_test
     self.go_to
     self.click_search_source_button
@@ -54,7 +65,9 @@ class SearchOfTalents
     talents = self.gather_talents
     self.validate_keywords(talents)
     random_talent_position = self.get_random_talent_position
-    self.click_random_talent (random_talent_position)
+    self.click_random_talent random_talent_position
+    random_talent = self.get_random_talent
+    self.validate_talent(random_talent, talents, random_talent_position)
     puts 'a'
   end
 end
