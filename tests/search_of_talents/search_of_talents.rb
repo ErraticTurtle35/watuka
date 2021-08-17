@@ -12,23 +12,19 @@ class SearchOfTalents
   end
 
   def click_search_source_button
-    element = @visitor_home_page.get_element(@visitor_home_page.switch_search_source_button, 'Xpath')
-    element.click
+    @visitor_home_page.click_search_source_button
   end
 
   def click_talent_option
-    element = @visitor_home_page.get_element(@visitor_home_page.freelancers_options, 'Xpath')
-    element.click
+    @visitor_home_page.click_talent_option
   end
 
   def click_search_input
-    element = @visitor_home_page.get_element(@visitor_home_page.search_talent_input, 'Xpath')
-    element.send_keys "Gabriel Morales"
+    @visitor_home_page.click_search_input("Gabriel Morales")
   end
 
   def click_search_button
-    element = @visitor_home_page.get_element(@visitor_home_page.search_button, 'Xpath')
-    element.click
+    @visitor_home_page.click_search_button
   end
 
   def execute_test

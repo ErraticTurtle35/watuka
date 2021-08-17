@@ -25,4 +25,23 @@ class VisitorHomePage < BasePage
     @search_button
   end
 
+  def click_search_source_button
+    element = self.get_element(@switch_search_source_button, 'Xpath')
+    element.click
+  end
+
+  def click_talent_option
+    element = self.get_element(@freelancers_options, 'Xpath')
+    element.click
+  end
+
+  def click_search_input(keywords)
+    element = self.get_element(@search_talent_input, 'Xpath')
+    element.send_keys keywords
+  end
+
+  def click_search_button
+    element = self.get_element(@search_button, 'Xpath')
+    element.click
+  end
 end
