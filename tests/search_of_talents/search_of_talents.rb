@@ -167,6 +167,7 @@ class SearchOfTalents
   end
 
   def execute_test
+    @logger.info('SearchOfTalents execute_test')
     go_to
     click_search_source_button
     click_talent_option
