@@ -11,6 +11,7 @@ class BasePage
       @driver = webdriver_instance
     end
     @logger = Logger.new(STDOUT)
+    @logger.level = Logger::INFO
   end
 
   def navigate_to(url)

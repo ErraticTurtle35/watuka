@@ -19,6 +19,10 @@ class WakutaSeleniumDriverFactory
     @configuration['driver']['timeout']
   end
 
+  def logger_level
+    @configuration['driver']['logger_level']
+  end
+
   def webdriver_instance
     case self.browser_selected
     when CHROME_WEBDRIVER_KEY

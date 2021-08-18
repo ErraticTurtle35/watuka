@@ -118,6 +118,7 @@ class SearchOfTalents
   end
 
   def validate_random_talent(random_talent, talent)
+    @logger.info("validate_random_talent %{random_talent}" % { random_talent: random_talent['talent_name'] })
     name_is_equal(random_talent, talent)
     profile_title_is_equal(random_talent, talent)
     country_is_equal(random_talent, talent)

@@ -1,6 +1,7 @@
 {
   "driver": {
     "browser": "firefox",
-    "timeout": 30
+    "timeout": 60,
+    "logger_level": "Logger::INFO"
   }
 }
