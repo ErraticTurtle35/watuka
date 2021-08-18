@@ -13,17 +13,17 @@ class TalentSearchResultPage < BasePage
 
   def gather_talents
     talents = []
-    self.get_elements(@talents, 'Xpath').each_with_index do |talent, position|
+    get_elements(@talents, 'Xpath').each_with_index do |talent, position|
       skills = []
-      self.get_child_elements(talent, @skills, 'Xpath').each_with_index do |skill, skill_position|
+      get_child_elements(talent, @skills, 'Xpath').each_with_index do |skill, skill_position|
         skills.push(skill.text)
       end
       talent = {
         'position' => position,
-        'talent_name' => self.get_child_element(talent, @identify_name, 'Xpath').text,
-        'profile_title' => self.get_child_element(talent, @freelancer_title, 'Xpath').text,
-        'country' => self.get_child_element(talent, @country_name, 'Xpath').text,
-        'profile_overview' => self.get_child_element(talent, @profile_overview, 'Xpath').text,
+        'talent_name' => get_child_element(talent, @identify_name, 'Xpath').text,
+        'profile_title' => get_child_element(talent, @freelancer_title, 'Xpath').text,
+        'country' => get_child_element(talent, @country_name, 'Xpath').text,
+        'profile_overview' => get_child_element(talent, @profile_overview, 'Xpath').text,
         'skills' => skills
       }
       talents.push(talent)
@@ -32,7 +32,7 @@ class TalentSearchResultPage < BasePage
   end
 
   def click_talent_by_position(talent_position)
-    talent = self.get_elements(@talents, 'Xpath')[talent_position]
+    talent = get_elements(@talents, 'Xpath')[talent_position]
     talent.click
   end
 end

@@ -61,17 +61,17 @@ class SearchOfTalents
   end
 
   def execute_test
-    self.go_to
-    self.click_search_source_button
-    self.click_talent_option
-    self.click_search_input
-    self.click_search_button
-    talents = self.gather_talents
-    self.validate_keywords(talents)
-    random_talent_position = self.get_random_talent_position
-    self.click_random_talent random_talent_position
-    random_talent = self.get_random_talent
-    self.validate_talent(random_talent, talents, random_talent_position)
+    go_to
+    click_search_source_button
+    click_talent_option
+    click_search_input
+    click_search_button
+    talents = gather_talents
+    validate_keywords(talents)
+    random_talent_position = get_random_talent_position
+    click_random_talent random_talent_position
+    random_talent = get_random_talent
+    validate_talent(random_talent, talents, random_talent_position)
     puts 'a'
   end
 end

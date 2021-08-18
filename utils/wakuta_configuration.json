@@ -1,5 +1,6 @@
 {
   "driver": {
-    "browser": "firefox"
+    "browser": "firefox",
+    "timeout": 30
   }
 }

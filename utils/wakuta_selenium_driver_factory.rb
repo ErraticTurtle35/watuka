@@ -15,6 +15,10 @@ class WakutaSeleniumDriverFactory
     @configuration['driver']['browser']
   end
 
+  def timeout
+    @configuration['driver']['timeout']
+  end
+
   def webdriver_instance
     case self.browser_selected
     when CHROME_WEBDRIVER_KEY
@@ -23,9 +27,13 @@ class WakutaSeleniumDriverFactory
       options.add_argument('--disable-popup-blocking')
       options.add_argument('--disable-translate')
       options.add_argument('--chromever=92.0.4515.131')
-      Selenium::WebDriver.for :chrome, options: options
+      web_driver = Selenium::WebDriver.for :chrome, options: options
+      web_driver.manage.timeouts.implicit_wait = timeout
+      web_driver
     when FIREFOX_WEBDRIVER_KEY
-      Selenium::WebDriver.for :firefox
+      web_driver = Selenium::WebDriver.for :firefox
+      web_driver.manage.timeouts.implicit_wait = timeout
+      web_driver
     else
       puts 'upss' # TODO: CATCH EXCEPTION
       # type code here
