@@ -18,6 +18,7 @@ class SearchOfTalents
   def go_to
     @logger.info("go_to: " + @configuration_reader.read_configuration['url'])
     @visitor_home_page = VisitorHomePage.new
+    @visitor_home_page.driver.manage.delete_all_cookies
     @visitor_home_page.navigate_to @configuration_reader.read_configuration['url']
   end
 
