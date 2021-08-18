@@ -15,7 +15,7 @@ class TalentSearchResultPage < BasePage
     talents = []
     get_elements(@talents, 'Xpath').each_with_index do |talent, position|
       skills = []
-      get_child_elements(talent, @skills, 'Xpath').each_with_index do |skill, skill_position|
+      get_child_elements(talent, @skills, 'Xpath').each do |skill|
         skills.push(skill.text)
       end
       talent = {
