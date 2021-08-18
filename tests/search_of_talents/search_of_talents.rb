@@ -39,39 +39,56 @@ class SearchOfTalents
     @talent_search_result_page.gather_talents
   end
 
-  def validate_keywords(talents)
-    talents.each do |talent|
-      if talent['talent_name'].include? @configuration_reader.read_configuration['searchKeyword']
-        puts 'Yups talent_name'
-      else
-        puts 'Nup talent_name'
-      end
+  def validate_keywords_in_talents(talents)
+    talents.each(&method(:validate_keywords_in_talent))
+  end
 
-      if talent['profile_title'].include? @configuration_reader.read_configuration['searchKeyword']
-        puts 'Yups profile_title'
-      else
-        puts 'Nup profile_title'
-      end
+  def validate_keywords_in_talent(talent)
+    validate_talent_name(talent)
+    validate_talent_profile_title(talent)
+    validate_talent_country(talent)
+    validate_talent_profile_overview(talent)
+    validate_talent_skills(talent)
+  end
 
-      if talent['country'].include? @configuration_reader.read_configuration['searchKeyword']
-        puts 'Yups country'
-      else
-        puts 'Nup country'
-      end
-
-      if talent['profile_overview'].include? @configuration_reader.read_configuration['searchKeyword']
-        puts 'Yups profile_overview'
-      else
-        puts 'Nup profile_overview'
-      end
-
-      if talent['skills'].include? @configuration_reader.read_configuration['searchKeyword']
-        puts 'Yups skills'
-      else
-        puts 'Nup skills'
-      end
+  def validate_talent_skills(talent)
+    if talent['skills'].include? @configuration_reader.read_configuration['searchKeyword']
+      puts 'Yups skills'
+    else
+      puts 'Nup skills'
     end
+  end
 
+  def validate_talent_profile_overview(talent)
+    if talent['profile_overview'].include? @configuration_reader.read_configuration['searchKeyword']
+      puts 'Yups profile_overview'
+    else
+      puts 'Nup profile_overview'
+    end
+  end
+
+  def validate_talent_country(talent)
+    if talent['country'].include? @configuration_reader.read_configuration['searchKeyword']
+      puts 'Yups country'
+    else
+      puts 'Nup country'
+    end
+  end
+
+  def validate_talent_profile_title(talent)
+    if talent['profile_title'].include? @configuration_reader.read_configuration['searchKeyword']
+      puts 'Yups profile_title'
+    else
+      puts 'Nup profile_title'
+    end
+  end
+
+  def validate_talent_name(talent)
+    if talent['talent_name'].include? @configuration_reader.read_configuration['searchKeyword']
+      puts 'Yups talent_name'
+    else
+      puts 'Nup talent_name'
+    end
   end
 
   def click_random_talent(talent_position)
@@ -87,8 +104,7 @@ class SearchOfTalents
     @talent_profile_page.gather_talent
   end
 
-  def validate_talent(random_talent, talents, talent_position)
-    talent = talents[talent_position]
+  def validate_talent(random_talent, talent)
     if talent['talent_name'] == random_talent['talent_name']
       puts 'Yups talent_name'
     else
@@ -120,38 +136,6 @@ class SearchOfTalents
     end
   end
 
-  def validate_random_talent(random_talent)
-    if random_talent['talent_name'].include? @configuration_reader.read_configuration['searchKeyword']
-      puts 'Yups talent_name'
-    else
-      puts 'Nup talent_name'
-    end
-
-    if random_talent['profile_title'].include? @configuration_reader.read_configuration['searchKeyword']
-      puts 'Yups profile_title'
-    else
-      puts 'Nup profile_title'
-    end
-
-    if random_talent['country'].include? @configuration_reader.read_configuration['searchKeyword']
-      puts 'Yups country'
-    else
-      puts 'Nup country'
-    end
-
-    if random_talent['profile_overview'].include? @configuration_reader.read_configuration['searchKeyword']
-      puts 'Yups profile_overview'
-    else
-      puts 'Nup profile_overview'
-    end
-
-    if random_talent['skills'].include? @configuration_reader.read_configuration['searchKeyword']
-      puts 'Yups skills'
-    else
-      puts 'Nup skills'
-    end
-  end
-
   def execute_test
     go_to
     click_search_source_button
@@ -159,12 +143,11 @@ class SearchOfTalents
     click_search_input
     click_search_button
     talents = gather_talents
-    validate_keywords(talents)
+    validate_keywords_in_talents(talents)
     random_talent_position = get_random_talent_position
     click_random_talent random_talent_position
     random_talent = get_random_talent
-    validate_random_talent(random_talent)
-    validate_talent(random_talent, talents, random_talent_position)
-    puts 'a'
+    validate_keywords_in_talent(random_talent)
+    validate_talent(random_talent, talents[random_talent_position])
   end
 end
