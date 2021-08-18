@@ -44,14 +44,14 @@ class SearchOfTalents
   end
 
   def validate_keywords_in_talent(talent)
-    validate_talent_name(talent)
-    validate_talent_profile_title(talent)
-    validate_talent_country(talent)
-    validate_talent_profile_overview(talent)
-    validate_talent_skills(talent)
+    keywords_in_name(talent)
+    keywords_in_profile_title(talent)
+    keywords_in_country(talent)
+    keywords_in_profile_overview(talent)
+    keywords_in_skills(talent)
   end
 
-  def validate_talent_skills(talent)
+  def keywords_in_skills(talent)
     if talent['skills'].include? @configuration_reader.read_configuration['searchKeyword']
       puts 'Yups skills'
     else
@@ -59,7 +59,7 @@ class SearchOfTalents
     end
   end
 
-  def validate_talent_profile_overview(talent)
+  def keywords_in_profile_overview(talent)
     if talent['profile_overview'].include? @configuration_reader.read_configuration['searchKeyword']
       puts 'Yups profile_overview'
     else
@@ -67,7 +67,7 @@ class SearchOfTalents
     end
   end
 
-  def validate_talent_country(talent)
+  def keywords_in_country(talent)
     if talent['country'].include? @configuration_reader.read_configuration['searchKeyword']
       puts 'Yups country'
     else
@@ -75,7 +75,7 @@ class SearchOfTalents
     end
   end
 
-  def validate_talent_profile_title(talent)
+  def keywords_in_profile_title(talent)
     if talent['profile_title'].include? @configuration_reader.read_configuration['searchKeyword']
       puts 'Yups profile_title'
     else
@@ -83,7 +83,7 @@ class SearchOfTalents
     end
   end
 
-  def validate_talent_name(talent)
+  def keywords_in_name(talent)
     if talent['talent_name'].include? @configuration_reader.read_configuration['searchKeyword']
       puts 'Yups talent_name'
     else
@@ -104,35 +104,51 @@ class SearchOfTalents
     @talent_profile_page.gather_talent
   end
 
-  def validate_talent(random_talent, talent)
-    if talent['talent_name'] == random_talent['talent_name']
-      puts 'Yups talent_name'
-    else
-      puts 'Nup talent_name'
-    end
+  def validate_random_talent(random_talent, talent)
+    name_is_equal(random_talent, talent)
+    profile_title_is_equal(random_talent, talent)
+    country_is_equal(random_talent, talent)
+    profile_overview_is_equal(random_talent, talent)
+    skills_are_equal(random_talent, talent)
+  end
 
-    if talent['profile_title'] == random_talent['profile_title']
-      puts 'Yups profile_title'
+  def skills_are_equal(random_talent, talent)
+    if talent['skills'] == random_talent['skills']
+      puts 'Yups skills'
     else
-      puts 'Nup profile_title'
+      puts 'Nup skills'
     end
+  end
 
-    if talent['country'] == random_talent['country']
-      puts 'Yups country'
-    else
-      puts 'Nup country'
-    end
-
+  def profile_overview_is_equal(random_talent, talent)
     if talent['profile_overview'] == random_talent['profile_overview']
       puts 'Yups profile_overview'
     else
       puts 'Nup profile_overview'
     end
+  end
 
-    if talent['skills'] == random_talent['skills']
-      puts 'Yups skills'
+  def country_is_equal(random_talent, talent)
+    if talent['country'] == random_talent['country']
+      puts 'Yups country'
     else
-      puts 'Nup skills'
+      puts 'Nup country'
+    end
+  end
+
+  def profile_title_is_equal(random_talent, talent)
+    if talent['profile_title'] == random_talent['profile_title']
+      puts 'Yups profile_title'
+    else
+      puts 'Nup profile_title'
+    end
+  end
+
+  def name_is_equal(random_talent, talent)
+    if talent['talent_name'] == random_talent['talent_name']
+      puts 'Yups talent_name'
+    else
+      puts 'Nup talent_name'
     end
   end
 
@@ -148,6 +164,6 @@ class SearchOfTalents
     click_random_talent random_talent_position
     random_talent = get_random_talent
     validate_keywords_in_talent(random_talent)
-    validate_talent(random_talent, talents[random_talent_position])
+    validate_random_talent(random_talent, talents[random_talent_position])
   end
 end
