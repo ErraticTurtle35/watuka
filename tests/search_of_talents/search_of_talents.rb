@@ -43,22 +43,32 @@ class SearchOfTalents
     talents.each do |talent|
       if talent['talent_name'].include? @configuration_reader.read_configuration['searchKeyword']
         puts 'Yups talent_name'
+      else
+        puts 'Nup talent_name'
       end
 
       if talent['profile_title'].include? @configuration_reader.read_configuration['searchKeyword']
         puts 'Yups profile_title'
+      else
+        puts 'Nup profile_title'
       end
 
       if talent['country'].include? @configuration_reader.read_configuration['searchKeyword']
         puts 'Yups country'
+      else
+        puts 'Nup country'
       end
 
       if talent['profile_overview'].include? @configuration_reader.read_configuration['searchKeyword']
         puts 'Yups profile_overview'
+      else
+        puts 'Nup profile_overview'
       end
 
       if talent['skills'].include? @configuration_reader.read_configuration['searchKeyword']
         puts 'Yups skills'
+      else
+        puts 'Nup skills'
       end
     end
 
@@ -81,44 +91,64 @@ class SearchOfTalents
     talent = talents[talent_position]
     if talent['talent_name'] == random_talent['talent_name']
       puts 'Yups talent_name'
+    else
+      puts 'Nup talent_name'
     end
 
     if talent['profile_title'] == random_talent['profile_title']
       puts 'Yups profile_title'
+    else
+      puts 'Nup profile_title'
     end
 
     if talent['country'] == random_talent['country']
       puts 'Yups country'
+    else
+      puts 'Nup country'
     end
 
     if talent['profile_overview'] == random_talent['profile_overview']
       puts 'Yups profile_overview'
+    else
+      puts 'Nup profile_overview'
     end
 
     if talent['skills'] == random_talent['skills']
       puts 'Yups skills'
+    else
+      puts 'Nup skills'
     end
   end
 
   def validate_random_talent(random_talent)
     if random_talent['talent_name'].include? @configuration_reader.read_configuration['searchKeyword']
       puts 'Yups talent_name'
+    else
+      puts 'Nup talent_name'
     end
 
     if random_talent['profile_title'].include? @configuration_reader.read_configuration['searchKeyword']
       puts 'Yups profile_title'
+    else
+      puts 'Nup profile_title'
     end
 
     if random_talent['country'].include? @configuration_reader.read_configuration['searchKeyword']
       puts 'Yups country'
+    else
+      puts 'Nup country'
     end
 
     if random_talent['profile_overview'].include? @configuration_reader.read_configuration['searchKeyword']
       puts 'Yups profile_overview'
+    else
+      puts 'Nup profile_overview'
     end
 
     if random_talent['skills'].include? @configuration_reader.read_configuration['searchKeyword']
       puts 'Yups skills'
+    else
+      puts 'Nup skills'
     end
   end
 
