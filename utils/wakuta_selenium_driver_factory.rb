@@ -35,8 +35,7 @@ class WakutaSeleniumDriverFactory
       web_driver.manage.timeouts.implicit_wait = timeout
       web_driver
     else
-      puts 'upss' # TODO: CATCH EXCEPTION
-      # type code here
+      raise NotImplementedError
     end
   end
 end

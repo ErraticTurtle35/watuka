@@ -2,6 +2,7 @@ require_relative '../../pages/visitor_home_page'
 require_relative '../../pages/talent_search_result_page'
 require_relative '../../pages/talent_profile_page'
 require_relative '../../utils/wakuta_configuration_reader'
+require "logger"
 
 SEARCH_OF_TALENT_DATA = '/data/search_of_talent_data.json'
 
@@ -11,30 +12,37 @@ class SearchOfTalents
     @talent_search_result_page = nil
     @talent_profile_page = nil
     @configuration_reader = WakutaConfigurationReader.new(File.dirname(__FILE__), SEARCH_OF_TALENT_DATA)
+    @logger = Logger.new(STDOUT)
   end
 
   def go_to
+    @logger.info("go_to: " + @configuration_reader.read_configuration['url'])
     @visitor_home_page = VisitorHomePage.new
     @visitor_home_page.navigate_to @configuration_reader.read_configuration['url']
   end
 
   def click_search_source_button
+    @logger.info("click_search_source_button")
     @visitor_home_page.click_search_source_button
   end
 
   def click_talent_option
+    @logger.info("click_talent_option")
     @visitor_home_page.click_talent_option
   end
 
   def click_search_input
+    @logger.info("click_search_input: " + @configuration_reader.read_configuration['searchKeyword'])
     @visitor_home_page.click_search_input(@configuration_reader.read_configuration['searchKeyword'])
   end
 
   def click_search_button
+    @logger.info("click_search_button")
     @visitor_home_page.click_search_button
   end
 
   def gather_talents
+    @logger.info("gather_talents")
     @talent_search_result_page = TalentSearchResultPage.new(@visitor_home_page.driver)
     @talent_search_result_page.gather_talents
   end

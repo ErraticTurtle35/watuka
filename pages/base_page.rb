@@ -1,4 +1,5 @@
 require_relative '../utils/wakuta_selenium_driver_factory'
+require "logger"
 
 class BasePage
   def initialize(driver = nil)
@@ -9,6 +10,7 @@ class BasePage
       webdriver_instance = wakuta_selenium_driver.webdriver_instance
       @driver = webdriver_instance
     end
+    @logger = Logger.new(STDOUT)
   end
 
   def navigate_to(url)
@@ -20,9 +22,9 @@ class BasePage
       element_type = get_available_type_elements(locator_type)
       return @driver.find_element(element_type, locator)
     rescue
-      puts('A') # TODO: Clear the error messages
+      raise NotImplementedError
     ensure
-      puts('A') # TODO: Clear the error messages
+      @logger.debug("get_element: %{locator} %{locator_type}" % { locator: locator, locator_type: locator_type })
     end
   end
 
@@ -31,9 +33,9 @@ class BasePage
       element_type = get_available_type_elements(locator_type)
       return @driver.find_elements(element_type, locator)
     rescue
-      puts('A') # TODO: Clear the error messages
+      raise NotImplementedError
     ensure
-      puts('A') # TODO: Clear the error messages
+      @logger.debug("get_elements: %{locator} %{locator_type}" % { locator: locator, locator_type: locator_type })
     end
   end
 
@@ -42,9 +44,9 @@ class BasePage
       element_type = get_available_type_elements(locator_type)
       return element.find_element(element_type, locator)
     rescue
-      puts('A') # TODO: Clear the error messages
+      raise NotImplementedError
     ensure
-      puts('A') # TODO: Clear the error messages
+      @logger.debug("get_child_element: %{locator} %{locator_type}" % { locator: locator, locator_type: locator_type })
     end
   end
 
@@ -53,9 +55,9 @@ class BasePage
       element_type = get_available_type_elements(locator_type)
       return element.find_elements(element_type, locator)
     rescue
-      puts('A') # TODO: Clear the error messages
+      raise NotImplementedError
     ensure
-      puts('A') # TODO: Clear the error messages
+      @logger.debug("get_child_elements: %{locator} %{locator_type}" % { locator: locator, locator_type: locator_type })
     end
   end
 
@@ -78,7 +80,7 @@ class BasePage
     when 'Xpath'
       :xpath
     else
-      puts('AAA') # TODO: Catch exception
+      raise NotImplementedError
     end
   end
 
