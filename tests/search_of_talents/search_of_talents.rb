@@ -48,10 +48,12 @@ class SearchOfTalents
   end
 
   def validate_keywords_in_talents(talents)
+    @logger.info("validate_keywords_in_talents")
     talents.each(&method(:validate_keywords_in_talent))
   end
 
   def validate_keywords_in_talent(talent)
+    @logger.info("validate_keywords_in_talent: %{talent}" % { talent: talent['talent_name'] })
     keywords_in_name(talent)
     keywords_in_profile_title(talent)
     keywords_in_country(talent)
@@ -61,53 +63,56 @@ class SearchOfTalents
 
   def keywords_in_skills(talent)
     if talent['skills'].include? @configuration_reader.read_configuration['searchKeyword']
-      puts 'Yups skills'
+      @logger.info("keywords_in_skills: FOUND")
     else
-      puts 'Nup skills'
+      @logger.info("keywords_in_skills: NOT FOUND")
     end
   end
 
   def keywords_in_profile_overview(talent)
     if talent['profile_overview'].include? @configuration_reader.read_configuration['searchKeyword']
-      puts 'Yups profile_overview'
+      @logger.info("keywords_in_profile_overview: FOUND")
     else
-      puts 'Nup profile_overview'
+      @logger.info("keywords_in_profile_overview: NOT FOUND")
     end
   end
 
   def keywords_in_country(talent)
     if talent['country'].include? @configuration_reader.read_configuration['searchKeyword']
-      puts 'Yups country'
+      @logger.info("keywords_in_country: FOUND")
     else
-      puts 'Nup country'
+      @logger.info("keywords_in_country: NOT FOUND")
     end
   end
 
   def keywords_in_profile_title(talent)
     if talent['profile_title'].include? @configuration_reader.read_configuration['searchKeyword']
-      puts 'Yups profile_title'
+      @logger.info("keywords_in_profile_title: FOUND")
     else
-      puts 'Nup profile_title'
+      @logger.info("keywords_in_profile_title: NOT FOUND")
     end
   end
 
   def keywords_in_name(talent)
     if talent['talent_name'].include? @configuration_reader.read_configuration['searchKeyword']
-      puts 'Yups talent_name'
+      @logger.info("keywords_in_name: FOUND")
     else
-      puts 'Nup talent_name'
+      @logger.info("keywords_in_name: NOT FOUND")
     end
   end
 
   def click_random_talent(talent_position)
+    @logger.info("click_random_talent")
     @talent_search_result_page.click_talent_by_position(talent_position)
   end
 
   def get_random_talent_position
+    @logger.info("get_random_talent_position")
     rand(0..9)
   end
 
   def get_random_talent
+    @logger.info("get_random_talent")
     @talent_profile_page = TalentProfilePage.new(@talent_search_result_page.driver)
     @talent_profile_page.gather_talent
   end
@@ -122,41 +127,41 @@ class SearchOfTalents
 
   def skills_are_equal(random_talent, talent)
     if talent['skills'] == random_talent['skills']
-      puts 'Yups skills'
+      @logger.info("skills_are_equal: True")
     else
-      puts 'Nup skills'
+      @logger.info("skills_are_equal: False")
     end
   end
 
   def profile_overview_is_equal(random_talent, talent)
     if talent['profile_overview'] == random_talent['profile_overview']
-      puts 'Yups profile_overview'
+      @logger.info("profile_overview_is_equal: True")
     else
-      puts 'Nup profile_overview'
+      @logger.info("profile_overview_is_equal: False")
     end
   end
 
   def country_is_equal(random_talent, talent)
     if talent['country'] == random_talent['country']
-      puts 'Yups country'
+      @logger.info("country_is_equal: True")
     else
-      puts 'Nup country'
+      @logger.info("country_is_equal: False")
     end
   end
 
   def profile_title_is_equal(random_talent, talent)
     if talent['profile_title'] == random_talent['profile_title']
-      puts 'Yups profile_title'
+      @logger.info("profile_title: True")
     else
-      puts 'Nup profile_title'
+      @logger.info("profile_title: False")
     end
   end
 
   def name_is_equal(random_talent, talent)
     if talent['talent_name'] == random_talent['talent_name']
-      puts 'Yups talent_name'
+      @logger.info("talent_name: True")
     else
-      puts 'Nup talent_name'
+      @logger.info("talent_name: False")
     end
   end
 
